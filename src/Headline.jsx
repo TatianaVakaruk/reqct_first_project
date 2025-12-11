@@ -13,8 +13,8 @@ const Headline = () => {
             and mobile apps
           </h2>
           <div className="headline__buttons">
-            <button className="button">Download Now</button>
-            <button className="button button_white">Watch Video</button>
+            <button className="headline__button">Download Now</button>
+            <button className="button button_white1">Watch Video</button>
           </div>
         </div>
         <img

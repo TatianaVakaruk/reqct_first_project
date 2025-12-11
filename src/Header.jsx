@@ -3,7 +3,7 @@ import React from 'react';
 const Header = () => {
   return (
     <header className="header">
-      <span className="header__logo">Times App</span>
+      <span className="header__logo">Timers App</span>
       <nav className="header__navigation">
         <ul className="header__links">
           <li>
