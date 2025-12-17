@@ -11,12 +11,14 @@ const Footer = () => {
         <span className="footer__logo">Timers App</span>
         <div className="footer__terms">
           <span>
-            Created with
+            <span className="move__shift">Created with</span>
             <img src={love} alt="love" />
-            by
-            <span className="bold">Sergey Azovskiy</span>
+            <span className="move__span">
+              by
+              <span className="bold"> Sergey Azovskiy</span>
+            </span>
           </span>
-          <span>© Timers App, 2025</span>
+          <span className="move__app"> © Timers App, 2025</span>
         </div>
         <ul className="footer__social-icons">
           <li>
