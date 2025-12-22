@@ -7,7 +7,8 @@ const Timers = () => {
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
-  const handleAddClick = () => {
+  const handleAddClick = (e) => {
+    e.preventDefault();
     if (inputValue === '') {
       return null;
     }
