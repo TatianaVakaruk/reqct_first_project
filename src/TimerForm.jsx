@@ -36,7 +36,7 @@ const TimerForm = () => {
         <input
           type="text"
           placeholder="Timer Name"
-          value={inputValue ?? ''}
+          value={inputValue}
           onChange={handleInputChange}
         />
         <button
