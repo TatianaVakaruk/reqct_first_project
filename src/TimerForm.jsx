@@ -48,7 +48,7 @@ const TimerForm = () => {
         </button>
       </form>
       <span className="timers__line"></span>
-      <ul className="timers__list">
+      <ul className="timer__list">
         {items.map((item, index) => (
           <li key={index} className="timer">
             <h6 className="timer__title">{item}</h6>
