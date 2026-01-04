@@ -1,35 +1,55 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import toggle from '../img/8.png';
 import delete1 from '../img/9.png';
-import moment from 'moment';
 
 const TimerForm = () => {
   const [inputValue, setInputValue] = useState('');
   const [items, setItems] = useState([]);
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
-  };
-  const handleAddClick = (e) => {
+  const [isRunning, setIsRunning] = useState(false);
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (inputValue === '') {
-      return;
-    }
-    setItems([...items, inputValue]); // Добавляем новое значение в массив
-    setInputValue(''); // Очищаем input
+
+    if (!inputValue.trim()) return;
+
+    setItems((prev) => [
+      ...prev,
+      {
+        id: Date.now(),
+        text: inputValue,
+        seconds: 0,
+      },
+    ]);
+
+    setInputValue('');
   };
-  const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setSeconds((prev) => prev + 1);
+      setItems((prev) =>
+        prev.map((item) => ({
+          ...item,
+          seconds: item.seconds + 1,
+        }))
+      );
     }, 1000);
-
     return () => clearInterval(interval);
   }, []);
 
-  const formattedTime = moment
-    .utc(moment.duration(seconds, 'seconds').asMilliseconds())
-    .format('HH:mm:ss');
+  const toggleTimer = () => {
+    isRunning = !isRunning;
+    setIsRunning(isRunning);
+  };
+
+  const removeItem = (id) => {
+    setItems(items.filter((item) => item.id !== id));
+  };
+  const formatTime = (sec) => {
+    const h = String(Math.floor(sec / 3600)).padStart(2, '0');
+    const m = String(Math.floor((sec % 3600) / 60)).padStart(2, '0');
+    const s = String(sec % 60).padStart(2, '0');
+    return `${h}:${m}:${s}`;
+  };
   return (
     <div className="timers__content">
       <form className="timers__form">
@@ -37,26 +57,37 @@ const TimerForm = () => {
           type="text"
           placeholder="Timer Name"
           value={inputValue}
-          onChange={handleInputChange}
+          onChange={(e) => setInputValue(e.target.value)}
         />
         <button
           className="timers__submit-button button1"
           type="submit"
-          onClick={handleAddClick}
+          onClick={handleSubmit}
         >
           Create Timer
         </button>
       </form>
       <span className="timers__line"></span>
-      <ul className="timer__list">
-        {items.map((item, index) => (
-          <li key={index} className="timer">
-            <h6 className="timer__title">{item}</h6>
-            <span className="timer__value">{formattedTime}</span>
-            <button className="timer__toggle-button">
+      <ul className="timers__list">
+        {items.map((item) => (
+          <li key={item.id} className="timers__forms">
+            <h6 className="timers__forms-title">{item.text}</h6>
+            <span
+              style={{ backgroundColor: 'rgb(231, 232, 234)' }}
+              className="timers__forms-value"
+            >
+              {formatTime(item.seconds)}
+            </span>
+            <button
+              onClick={toggleTimer}
+              className="timers__forms_toggle-button timers__forms_toggle-button-paused"
+            >
               <img src={toggle} alt="timer toggle" />
             </button>
-            <button className="timer__delete-button">
+            <button
+              onClick={() => removeItem(item.id)}
+              className="timers__forms_delete-button"
+            >
               <img src={delete1} alt="delete" />
             </button>
           </li>

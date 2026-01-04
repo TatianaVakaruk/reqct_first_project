@@ -10,7 +10,7 @@
     flex-direction: column;
     min-height: 100vh;
     background-color: #f8f9fa;
-    margin: 0 auto;
+    margin: auto;
   }
   .header {
     position: absolute;
@@ -235,6 +235,61 @@
       display: flex;
       flex-direction: column;
       gap: 40px;
+    }
+    &__forms {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: auto;
+      gap: 20px;
+      & button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        height: 50px;
+        border: none;
+      }
+      &-title {
+        font-size: 20px;
+        font-weight: 800;
+        color: #5586f2;
+        width: 130px;
+        text-wrap: nowrap;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+        cursor: pointer;
+      }
+      &-value {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 117px;
+        height: 50px;
+        border-radius: 6px;
+        font-size: 17px;
+        color: #676c75;
+        margin: 0 4px;
+      }
+      &_toggle-button {
+        background-color: #fff;
+        border-radius: 50%;
+
+        position: relative;
+        top: 9px;
+        &-paused {
+          background-color: #fff;
+          padding-left: 4px;
+        }
+      }
+      &_delete-button {
+        background-color: #fff;
+        border-radius: 6px;
+
+        position: relative;
+        top: 9px;
+        left: 7px;
+      }
     }
   }
 
