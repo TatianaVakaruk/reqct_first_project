@@ -258,12 +258,12 @@
       &-title {
         font-size: 20px;
         font-weight: 800;
-        color: #5586f2;
         width: 130px;
         text-wrap: nowrap;
         overflow-x: hidden;
         text-overflow: ellipsis;
         cursor: pointer;
+        color: #676c75;
       }
 
       &-value {
@@ -274,7 +274,6 @@
         height: 50px;
         border-radius: 6px;
         font-size: 17px;
-        color: #676c75;
       }
       &_toggle-button {
         background-color: #fff;

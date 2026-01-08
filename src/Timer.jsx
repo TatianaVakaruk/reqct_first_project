@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import toggle from '../img/8.png';
 import delete1 from '../img/9.png';
+import toggle1 from '../img/10.png';
 import { setInterval } from 'core-js';
 
 const Timer = ({ item, setItems }) => {
@@ -13,7 +14,7 @@ const Timer = ({ item, setItems }) => {
     return () => clearInterval(interval);
   }, [timer.isRunning]);
   const toggleTimer = () =>
-    setTimer((prev) => ({ ...prev, isRunning: !isRunning }));
+    setTimer((prev) => ({ ...prev, isRunning: !prev.isRunning }));
   const removeItem = () =>
     setItems((prev) => prev.filter((item) => item.id !== timer.id));
   const formatTime = (s) =>
@@ -25,7 +26,11 @@ const Timer = ({ item, setItems }) => {
     <li className="timers__forms">
       <h6 className="timers__forms-title">{timer.text}</h6>
       <span
-        style={{ backgroundColor: 'rgb(231, 232, 234)' }}
+        style={
+          timer.isRunning
+            ? { backgroundColor: 'rgb(231, 232, 234)' }
+            : { backgroundColor: '#ff4876', opacity: 0.15 }
+        }
         className="timers__forms-value"
       >
         {formatTime(timer.seconds)}
@@ -35,7 +40,11 @@ const Timer = ({ item, setItems }) => {
         className="timers__forms_toggle-button
         timers__forms_toggle-button-paused"
       >
-        <img src={toggle} alt="timer toggle" />
+        {timer.isRunning ? (
+          <img src={toggle} alt="timer toggle" />
+        ) : (
+          <img src={toggle1} alt="paused" />
+        )}
       </button>
       <button
         onClick={() => removeItem(item.id)}
