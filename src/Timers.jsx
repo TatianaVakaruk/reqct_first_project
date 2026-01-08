@@ -19,7 +19,7 @@ const Timers = () => {
       <TimerForm setItems={setItems} />
       <ul className="timers__list">
         {items.map((item) => (
-          <Timer key={item.id} item={item} setItems={setItems} />
+          <Timer key={item.id} items={items} item={item} setItems={setItems} />
         ))}
       </ul>
     </section>
