@@ -20,13 +20,7 @@ const TimerForm = ({ items, setItems }) => {
 
     setInputValue('');
   };
-  localStorage.setItems('items', JSON.stringify(items));
 
-  const savedTimer = localStorage.getItem('items');
-  items = null;
-  if (savedTimer) {
-    items = JSON.parse(savedTimer);
-  }
   return (
     <div className="timers__content">
       <form className="timers__form">
