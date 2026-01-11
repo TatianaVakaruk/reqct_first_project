@@ -4,7 +4,7 @@ import delete1 from '../img/9.png';
 import toggle1 from '../img/10.png';
 import { setInterval } from 'core-js';
 
-const Timer = ({ item, setItems }) => {
+const Timer = ({ item, setItems, setTimers }) => {
   const [timer, setTimer] = useState(item);
   useEffect(() => {
     if (!timer.isRunning) return;
@@ -17,8 +17,19 @@ const Timer = ({ item, setItems }) => {
     }, 1000);
     return () => clearInterval(interval);
   }, [timer.isRunning]);
-  const toggleTimer = () =>
-    setTimer((prev) => ({ ...prev, isRunning: !prev.isRunning }));
+  const toggleTimer = (id) => {
+    setTimers((prev) =>
+      prev.map((timer) =>
+        timer.id === id
+          ? {
+              ...timer,
+              isRunning: !timer.isRunning,
+              lastUpdated: new Date(),
+            }
+          : timer
+      )
+    );
+  };
   const removeItem = () =>
     setItems((prev) => prev.filter((item) => item.id !== timer.id));
   const formatTime = (s) =>
